@@ -363,7 +363,7 @@ class ReplView(object):
                 packet = self._repl_reader.queue.get_nowait()
                 if packet is None:
                     return False
-                for _ in xrange(1000):
+                for _ in range(1000):
                     try:
                         packet += self._repl_reader.queue.get_nowait()
                     except queue.Empty: break
