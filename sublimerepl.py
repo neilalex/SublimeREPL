@@ -346,16 +346,33 @@ class ReplView(object):
     def handle_repl_output(self):
         """Returns new data from Repl and bool indicating if Repl is still
            working"""
-        try:
-            while True:
+        if self.repl.apiv2:
+            try:
+                while True:
+                    packet = self._repl_reader.queue.get_nowait()
+                    if packet is None:
+                        return False
+
+                    self.handle_repl_packet(packet)
+
+            except queue.Empty:
+                return True
+
+        else:
+            try:
                 packet = self._repl_reader.queue.get_nowait()
                 if packet is None:
                     return False
+                for _ in xrange(1000):
+                    try:
+                        packet += self._repl_reader.queue.get_nowait()
+                    except queue.Empty: break
 
                 self.handle_repl_packet(packet)
+                return True
 
-        except queue.Empty:
-            return True
+            except queue.Empty:
+                return True
 
     def handle_repl_packet(self, packet):
         if self.repl.apiv2:
