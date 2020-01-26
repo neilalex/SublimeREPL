@@ -1,0 +1,10 @@
+[
+    {
+        "caption": "SublimeREPL: Cloud Screen List",
+        "command": "run_existing_window_command", "args":
+        {
+            "id": "repl_cloudscreenlist",
+            "file": "config/Screen-List-Cloud/Main.sublime-menu"
+        }
+    }
+]

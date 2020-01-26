@@ -1,0 +1,10 @@
+[
+    {
+        "caption": "SublimeREPL: R Cloud",
+        "command": "run_existing_window_command", "args":
+        {
+            "id": "repl_rcloud",
+            "file": "config/R-Cloud/Main.sublime-menu"
+        }
+    }
+]
