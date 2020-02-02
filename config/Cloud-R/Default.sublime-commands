@@ -1,10 +1,10 @@
 [
     {
-        "caption": "SublimeREPL: R Cloud",
+        "caption": "SublimeREPL: Cloud R",
         "command": "run_existing_window_command", "args":
         {
-            "id": "repl_rcloud",
-            "file": "config/R-Cloud/Main.sublime-menu"
+            "id": "repl_cloudr",
+            "file": "config/Cloud-R/Main.sublime-menu"
         }
     }
 ]

@@ -9,8 +9,8 @@
             "children":
             [
                 {"command": "repl_open",
-                 "caption": "R Cloud",
-                 "id": "repl_rcloud",
+                 "caption": "Cloud R",
+                 "id": "repl_cloudr",
                  "mnemonic": "",
                  "args": {
                     "type": "subprocess",
@@ -24,7 +24,7 @@
                     "soft_quit": "\nquit(save=\"no\")\n",
                     "cmd": {"linux": ["R", "--interactive", "--no-readline"],
                             "osx": ["R", "--interactive", "--no-readline"],
-                            "windows": ["C:\\Program Files\\Git\\usr\\bin\\bash.exe", "-i", "-l", "-c", "ssh -tt aws 'screen -qdmS R_nax R --no-save;screen -qRR'"]},
+                            "windows": ["C:\\Progra~1\\Git\\usr\\bin\\bash.exe", "-i", "-l", "-c", "ssh -tt aws 'screen -qdmS R_nax R --no-save --encoding=$win_cmd_encoding;screen -qRR'"]},
                     "cwd": "$file_path",
                     "extend_env": {"osx": {"PATH": "{PATH}:/usr/local/bin"},
                                    "linux": {"PATH": "{PATH}:/usr/local/bin"},
