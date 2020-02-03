@@ -189,7 +189,8 @@ class ReplView(object):
         self._history_match = None
 
         self._filter_color_codes = settings.get("filter_ascii_color_codes")
-        self._remove_nonascii_codes = settings.get("filter_nonascii_codes")
+        self._filter_nonascii_codes = settings.get("filter_nonascii_codes")
+        self._filter_terminal_codes = settings.get("filter_terminal_codes")
 
         # optionally move view to a different group
         # find current position of this replview
@@ -322,11 +323,13 @@ class ReplView(object):
     def write(self, unistr):
         """Writes output from Repl into this view."""
         # remove color codes
+        if self._filter_terminal_codes:
+            unistr = re.sub(r'\x1b\[\??[0-9]*[a-zA-Z]', '', unistr)
+            unistr = re.sub(r'\x1b[7]', '', unistr)
         if self._filter_color_codes:
             unistr = re.sub(r'\033\[\d*(;\d*)?\w', '', unistr)
             unistr = re.sub(r'.\x08', '', unistr)
-
-        if self._remove_nonascii_codes:
+        if self._filter_nonascii_codes:
             unistr = unistr.encode().decode('ascii', 'replace').replace(u'\ufffd', '')
 
         # string is assumed to be already correctly encoded
