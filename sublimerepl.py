@@ -189,6 +189,7 @@ class ReplView(object):
         self._history_match = None
 
         self._filter_color_codes = settings.get("filter_ascii_color_codes")
+        self._remove_nonascii_codes = settings.get("filter_nonascii_codes")
 
         # optionally move view to a different group
         # find current position of this replview
@@ -324,6 +325,9 @@ class ReplView(object):
         if self._filter_color_codes:
             unistr = re.sub(r'\033\[\d*(;\d*)?\w', '', unistr)
             unistr = re.sub(r'.\x08', '', unistr)
+
+        if self._remove_nonascii_codes:
+            unistr = unistr.encode().decode('ascii', 'replace').replace(u'\ufffd', '')
 
         # string is assumed to be already correctly encoded
         self._view.run_command("repl_insert_text", {"pos": self._output_end - self._prompt_size, "text": unistr})
